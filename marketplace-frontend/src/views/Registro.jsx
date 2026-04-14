@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react"; // 1. Agregamos useContext
 import { Container, Form, Button, Card, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserProvider"; // 2. Importamos el contexto
 
 const Registro = () => {
   const [email, setEmail] = useState("");
@@ -8,40 +9,47 @@ const Registro = () => {
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState(""); 
   
+  // 3. Extraemos la función de registro del contexto
+  const { registerUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  // 4. Convertimos a función async
+  const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
 
-    // 1. Validación: Campos vacios
+    // --- Validaciones locales (se mantienen igual) ---
     if (!email.trim() || !password.trim() || !confirm.trim()) {
       setError("Todos los campos son obligatorios.");
       return;
     }
 
-    // 2. Validacion: Formato de Email (Regex)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError("Por favor, ingresa un correo electrónico con formato válido.");
       return;
     }
 
-
     if (password.length < 6) {
       setError("La contraseña debe tener al menos 6 caracteres por seguridad.");
       return;
     }
-
 
     if (password !== confirm) {
       setError("Las contraseñas no coinciden. Revisa bien.");
       return;
     }
 
-    // Si todo sale bien:
-    alert("¡Registro exitoso! Ya eres parte de la comunidad.");
-    navigate("/login"); 
+    // --- INTEGRACIÓN CON EL BACKEND ---
+    // Si las validaciones pasan, llamamos a la nube
+    const success = await registerUser({ email, password });
+
+    if (success) {
+      alert("¡Registro exitoso! Los datos ya están guardados en la nube.");
+      navigate("/login"); 
+    } else {
+      setError("Hubo un problema al registrar el usuario. El correo podría estar en uso.");
+    }
   };
 
   return (
@@ -50,7 +58,6 @@ const Registro = () => {
         <Card.Body>
           <h2 className="text-center mb-4 text-success fw-bold">Crear Cuenta</h2>
           
-
           {error && <Alert variant="danger" className="py-2 small">{error}</Alert>}
 
           <Form onSubmit={handleRegister}>
