@@ -90,9 +90,34 @@ const UserProvider = ({ children }) => {
     localStorage.removeItem("token");
     setUser(null);
   };
+  const addProduct = async (product) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(`${API_URL}/productos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` // Enviamos el token para saber quién publica
+        },
+        body: JSON.stringify(product),
+      });
+  
+      if (response.ok) {
+        // Opcional: Volver a pedir los productos para que se actualice la lista
+        const res = await fetch(`${API_URL}/productos`);
+        const updatedProducts = await res.json();
+        setProducts(updatedProducts);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error al publicar producto:", error);
+      return false;
+    }
+  };
 
   return (
-    <UserContext.Provider value={{ user, setUser, login, logout, registerUser, products, API_URL }}>
+    <UserContext.Provider value={{ user, setUser, login, logout, registerUser, products, API_URL, addProduct }}>
       {children}
     </UserContext.Provider>
   );
