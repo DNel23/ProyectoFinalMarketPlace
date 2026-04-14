@@ -9,16 +9,20 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([]);
 
-  // FUNCIÓN NUEVA: Obtiene los datos del usuario (nombre, email, etc.) usando el Token
+  // FUNCIÓN CORREGIDA: Llama a /perfil y accede a data.user
   const getProfile = async (token) => {
     try {
-      const response = await fetch(`${API_URL}/usuarios`, {
+      const response = await fetch(`${API_URL}/perfil`, { 
         headers: { Authorization: `Bearer ${token}` },
       });
+
       if (response.ok) {
         const data = await response.json();
-        // Guardamos todos los datos (nombre incluido) para que el Perfil no se rompa
-        setUser({ ...data, logged: true });
+        // data.user contiene { email, nombre, avatar } desde el backend
+        setUser({ ...data.user, logged: true });
+      } else {
+        // Si el token no es válido, limpiamos el estado
+        logout();
       }
     } catch (error) {
       console.error("Error al obtener el perfil:", error);
@@ -37,7 +41,7 @@ const UserProvider = ({ children }) => {
     };
     getProducts();
     
-    // Si hay un token al recargar la página, recuperamos los datos del usuario
+    // Recuperamos sesión si existe un token
     const token = localStorage.getItem("token");
     if (token) {
       getProfile(token);
@@ -71,8 +75,7 @@ const UserProvider = ({ children }) => {
         const token = await response.text();
         localStorage.setItem("token", token);
         
-        // IMPORTANTE: Una vez que tenemos el token, pedimos el perfil completo
-        // antes de decir que el login fue exitoso
+        // Obtenemos los datos completos del usuario antes de terminar
         await getProfile(token);
         return true;
       }
