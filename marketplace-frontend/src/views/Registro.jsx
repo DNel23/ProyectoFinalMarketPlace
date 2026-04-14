@@ -18,7 +18,7 @@ const Registro = () => {
     e.preventDefault();
     setError("");
 
-    // --- Validaciones locales (se mantienen igual) ---
+    // --- Validaciones locales---
     if (!email.trim() || !password.trim() || !confirm.trim()) {
       setError("Todos los campos son obligatorios.");
       return;
@@ -42,15 +42,19 @@ const Registro = () => {
 
     // --- INTEGRACIÓN CON EL BACKEND ---
     // Si las validaciones pasan, llamamos a la nube
-    const success = await registerUser({ email, password });
-
+    const success = await registerUser({ 
+      email, 
+      password, 
+      nombre: "Usuario Nuevo", // Valor temporal para evitar el error 500
+      avatar: "https://via.placeholder.com/150" 
+    });
+    
     if (success) {
       alert("¡Registro exitoso! Los datos ya están guardados en la nube.");
       navigate("/login"); 
     } else {
       setError("Hubo un problema al registrar el usuario. El correo podría estar en uso.");
     }
-  };
 
   return (
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
