@@ -9,7 +9,22 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([]);
 
-  // 1. Obtener productos de la base de datos al cargar la app
+  // FUNCIÓN NUEVA: Obtiene los datos del usuario (nombre, email, etc.) usando el Token
+  const getProfile = async (token) => {
+    try {
+      const response = await fetch(`${API_URL}/usuarios`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // Guardamos todos los datos (nombre incluido) para que el Perfil no se rompa
+        setUser({ ...data, logged: true });
+      }
+    } catch (error) {
+      console.error("Error al obtener el perfil:", error);
+    }
+  };
+
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -22,15 +37,13 @@ const UserProvider = ({ children }) => {
     };
     getProducts();
     
-    // Al cargar, verificamos si hay un token guardado para mantener la sesión
+    // Si hay un token al recargar la página, recuperamos los datos del usuario
     const token = localStorage.getItem("token");
     if (token) {
-      // Aquí podrías opcionalmente validar el token con el backend
-      setUser({ logged: true }); 
+      getProfile(token);
     }
   }, []);
 
-  // 2. Función para Registrar Usuario (Persistencia en Neon)
   const registerUser = async (newUser) => {
     try {
       const response = await fetch(`${API_URL}/usuarios`, {
@@ -46,7 +59,6 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  // 3. Función para Iniciar Sesión (Autenticación JWT)
   const login = async (credentials) => {
     try {
       const response = await fetch(`${API_URL}/login`, {
@@ -57,8 +69,11 @@ const UserProvider = ({ children }) => {
 
       if (response.ok) {
         const token = await response.text();
-        localStorage.setItem("token", token); // Guardamos la llave en el navegador
-        setUser({ email: credentials.email, logged: true });
+        localStorage.setItem("token", token);
+        
+        // IMPORTANTE: Una vez que tenemos el token, pedimos el perfil completo
+        // antes de decir que el login fue exitoso
+        await getProfile(token);
         return true;
       }
       return false;
@@ -68,7 +83,6 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  // 4. Cerrar Sesión
   const logout = () => {
     localStorage.removeItem("token");
     setUser(null);
