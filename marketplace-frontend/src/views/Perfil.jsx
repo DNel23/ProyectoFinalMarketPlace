@@ -5,8 +5,11 @@ import { Container, Card, Row, Col, Badge } from "react-bootstrap";
 const Perfil = () => {
   const { user } = useContext(UserContext);
 
-  // Si por alguna razon el usuario llega aqui sin datos 
-  if (!user) return <h2 className="text-center mt-5">Cargando perfil...</h2>;
+  // Protección extra: Si el usuario es null o no tiene datos aún
+  if (!user) return <h2 className="text-center mt-5 text-muted">Cargando perfil...</h2>;
+
+  // Usamos una constante para el nombre con un respaldo por si viene vacío
+  const nombreUsuario = user?.nombre || "Usuario";
 
   return (
     <Container className="my-5">
@@ -19,11 +22,12 @@ const Perfil = () => {
             <Card.Body className="p-4 text-center">
               <div className="mb-4">
                 <div className="bg-light rounded-circle d-inline-flex align-items-center justify-content-center shadow-sm" style={{ width: '100px', height: '100px', fontSize: '2.5rem' }}>
-                  {user.nombre.charAt(0)}
+                  {/* El .charAt(0) ahora es seguro porque nombreUsuario nunca es undefined */}
+                  {nombreUsuario.charAt(0).toUpperCase()}
                 </div>
               </div>
-              <h4 className="fw-bold">{user.nombre}</h4>
-              <p className="text-muted mb-3">{user.email}</p>
+              <h4 className="fw-bold">{nombreUsuario}</h4>
+              <p className="text-muted mb-3">{user?.email}</p>
               <Badge bg="info" className="px-3 py-2 mb-4">
                 Rol: Vendedor Local
               </Badge>
