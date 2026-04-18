@@ -1,6 +1,6 @@
 import { Container, Button, Row, Col, Form, InputGroup, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import './Home.css'; // Importante crear este archivo abajo
+import './Home.css'; 
 
 const Home = () => {
   const navigate = useNavigate();
