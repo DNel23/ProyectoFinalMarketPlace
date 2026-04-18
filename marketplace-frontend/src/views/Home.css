@@ -1,0 +1,62 @@
+.home-wrapper {
+  background-color: #fcfcfc;
+}
+
+.hero-section {
+  padding: 100px 0;
+  /* Degradado sutil del mockup */
+  background: linear-gradient(180deg, #f4f7f6 0%, #ffffff 100%);
+}
+
+.main-title {
+  font-size: 3.5rem;
+  color: #333;
+  line-height: 1.2;
+}
+
+/* Redondear la barra de búsqueda */
+.search-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.search-container input:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.rounded-start-pill {
+  border-top-left-radius: 50px !important;
+  border-bottom-left-radius: 50px !important;
+}
+
+.rounded-end-pill {
+  border-top-right-radius: 50px !important;
+  border-bottom-right-radius: 50px !important;
+}
+
+/* Estilo de las tarjetas */
+.category-card {
+  transition: transform 0.3s ease;
+  border-radius: 20px !important;
+  overflow: hidden;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+}
+
+.cat-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Media query para pantallas chicas */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2.2rem;
+  }
+}
