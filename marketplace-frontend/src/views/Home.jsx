@@ -13,31 +13,33 @@ const Home = () => {
           <Row className="justify-content-center">
             <Col md={10} lg={8}>
               <h1 className="main-title mb-4">
-                Los mejores productos directo de tus <span className="text-success fw-bold">vecinos</span> a tu mesa
+                Los mejores productos directo de tus <span className="highlight-green">vecinos</span> a tu mesa
               </h1>
-              
-              {/* BARRA DE BÚSQUEDA */}
-              <div className="search-container mb-5 shadow-sm">
-                <InputGroup size="lg">
-                  <Form.Control
-                    placeholder="Busca frutas, herramientas, abarrotes..."
-                    aria-label="Search"
-                    className="border-0 ps-4 rounded-start-pill"
-                  />
-                  <Button variant="success" className="px-4 rounded-end-pill fw-bold">
-                    Buscar
-                  </Button>
-                </InputGroup>
-              </div>
 
+              {/* BOTÓN VER PRODUCTOS (Ahora arriba) */}
               <Button 
                 variant="success" 
-                size="lg" 
-                className="px-5 py-3 fw-bold shadow-sm mb-5"
+                className="btn-main-action mb-5"
                 onClick={() => navigate('/marketplace')}
               >
                 Ver Productos
               </Button>
+              
+              {/* BARRA DE BÚSQUEDA */}
+              <div className="search-wrapper mb-5">
+                <InputGroup className="custom-search-bar">
+                  <InputGroup.Text className="bg-white border-0 ps-4">
+                    <i className="bi bi-search text-muted"></i> {/* Asegúrate de tener bootstrap-icons */}
+                  </InputGroup.Text>
+                  <Form.Control
+                    placeholder="Busca frutas, herramientas, abarrotes..."
+                    className="border-0 shadow-none"
+                  />
+                  <Button variant="success" className="btn-search">
+                    Buscar
+                  </Button>
+                </InputGroup>
+              </div>
             </Col>
           </Row>
         </Container>
@@ -46,42 +48,62 @@ const Home = () => {
       {/* SECCIÓN CATEGORÍAS */}
       <section className="categories-section py-5">
         <Container>
-          <h2 className="text-center mb-5 fw-bold text-dark">Categorias populares</h2>
+          <h2 className="text-center mb-5 section-subtitle">Categorias populares</h2>
           <Row className="g-4">
             {/* Categoría 1 */}
-            <Col md={4}>
-              <Card className="category-card border-0 shadow-sm h-100">
-                <Card.Img variant="top" src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=400" className="cat-img" />
-                <Card.Body className="text-center p-4">
-                  <Card.Title className="fw-bold fs-4">Frutas</Card.Title>
-                  <Button variant="success" className="mt-3 px-4 rounded-pill" onClick={() => navigate('/marketplace')}>
-                    Ver mas
-                  </Button>
-                </Card.Body>
+            <Col lg={4} md={6}>
+              <Card className="category-horizontal-card border-0 shadow-sm">
+                <Row className="g-0 align-items-center">
+                  <Col xs={5}>
+                    <Card.Img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=400" className="img-fluid rounded-start-custom" />
+                  </Col>
+                  <Col xs={7}>
+                    <Card.Body>
+                      <Card.Title className="cat-title">Frutas y verduras</Card.Title>
+                      <Button variant="success" size="sm" className="btn-ver-mas" onClick={() => navigate('/marketplace')}>
+                        Ver mas
+                      </Button>
+                    </Card.Body>
+                  </Col>
+                </Row>
               </Card>
             </Col>
+
             {/* Categoría 2 */}
-            <Col md={4}>
-              <Card className="category-card border-0 shadow-sm h-100">
-                <Card.Img variant="top" src="https://images.unsplash.com/photo-1530124560677-bdaea02c9a13?q=80&w=400" className="cat-img" />
-                <Card.Body className="text-center p-4">
-                  <Card.Title className="fw-bold fs-4">Herramientas</Card.Title>
-                  <Button variant="success" className="mt-3 px-4 rounded-pill" onClick={() => navigate('/marketplace')}>
-                    Ver mas
-                  </Button>
-                </Card.Body>
+            <Col lg={4} md={6}>
+              <Card className="category-horizontal-card border-0 shadow-sm">
+                <Row className="g-0 align-items-center">
+                  <Col xs={5}>
+                    <Card.Img src="https://images.unsplash.com/photo-1530124560677-bdaea02c9a13?q=80&w=400" className="img-fluid rounded-start-custom" />
+                  </Col>
+                  <Col xs={7}>
+                    <Card.Body>
+                      <Card.Title className="cat-title">Herramientas</Card.Title>
+                      <Button variant="success" size="sm" className="btn-ver-mas" onClick={() => navigate('/marketplace')}>
+                        Ver mas
+                      </Button>
+                    </Card.Body>
+                  </Col>
+                </Row>
               </Card>
             </Col>
+
             {/* Categoría 3 */}
-            <Col md={4}>
-              <Card className="category-card border-0 shadow-sm h-100">
-                <Card.Img variant="top" src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=400" className="cat-img" />
-                <Card.Body className="text-center p-4">
-                  <Card.Title className="fw-bold fs-4">Abarrotes</Card.Title>
-                  <Button variant="success" className="mt-3 px-4 rounded-pill" onClick={() => navigate('/marketplace')}>
-                    Ver mas
-                  </Button>
-                </Card.Body>
+            <Col lg={4} md={6}>
+              <Card className="category-horizontal-card border-0 shadow-sm">
+                <Row className="g-0 align-items-center">
+                  <Col xs={5}>
+                    <Card.Img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=400" className="img-fluid rounded-start-custom" />
+                  </Col>
+                  <Col xs={7}>
+                    <Card.Body>
+                      <Card.Title className="cat-title">Abarrotes</Card.Title>
+                      <Button variant="success" size="sm" className="btn-ver-mas" onClick={() => navigate('/marketplace')}>
+                        Ver mas
+                      </Button>
+                    </Card.Body>
+                  </Col>
+                </Row>
               </Card>
             </Col>
           </Row>
