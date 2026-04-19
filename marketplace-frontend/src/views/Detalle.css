@@ -1,0 +1,82 @@
+.detalle-wrapper {
+  /* Mismo fondo degradado que la Home para mantener coherencia visual */
+  background: radial-gradient(circle at center, #ffffff 0%, #e9e9e9 100%);
+  min-height: calc(100vh - 80px); /* Ajustado por el navbar */
+  display: flex;
+  align-items: center;
+}
+
+.product-detail-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #222;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+/* Sección de Stock */
+.stock-label {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #222;
+  display: block;
+}
+
+.stock-value {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.product-detail-description {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  max-width: 450px;
+  margin: 20px 0;
+}
+
+.product-detail-price {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #222;
+  margin-top: 30px;
+}
+
+/* Botón de contacto verde */
+.btn-contact-seller {
+  background-color: #00d170 !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 12px 35px !important;
+  font-weight: bold !important;
+  font-size: 1.1rem !important;
+}
+
+.btn-contact-seller:hover {
+  background-color: #00b360 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 209, 112, 0.3);
+}
+
+/* Icono de corazón (favoritos) */
+.btn-wishlist-detail {
+  background: none;
+  border: none;
+  font-size: 2.2rem;
+  color: #555;
+  transition: color 0.2s;
+}
+
+.btn-wishlist-detail:hover {
+  color: #ff4757;
+}
+
+/* Ajustes de imagen */
+.product-main-img {
+  max-height: 500px;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+}
+
+@media (max-width: 768px) {
+  .product-detail-title { font-size: 2.2rem; }
+  .detalle-wrapper { padding: 40px 0; }
+}
