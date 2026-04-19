@@ -26,7 +26,6 @@ const Navigation = () => {
           <Nav className="ms-auto align-items-center">
             {/* Si quieres mantener Home y Tienda, se verán aquí. 
                 Si quieres exacto al diseño, puedes comentarlos. */}
-            <NavLink className="nav-link-custom me-3" to="/marketplace">tienda</NavLink>
 
             {user ? (
               <>
