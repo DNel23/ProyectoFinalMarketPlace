@@ -21,7 +21,7 @@ const Marketplace = () => {
             </div>
             <div className="banner-image-side d-none d-md-block">
               {/* Aquí insertas la imagen de la persona que extraigas */}
-              <img src="/src/views/banner-person.png" alt="Promo" className="img-fluid" />
+              <img src="/banner-person.png" alt="Promo" className="img-fluid" />
             </div>
           </div>
         </Container>
