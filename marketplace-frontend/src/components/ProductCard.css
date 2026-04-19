@@ -1,0 +1,64 @@
+.custom-product-item {
+  transition: transform 0.2s;
+}
+
+.product-frame {
+  border: 2px solid #00d170; /* Borde verde del diseño */
+  border-radius: 0; /* Si prefieres recto como el mockup */
+  position: relative;
+  background: white;
+  padding: 20px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wishlist-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #333;
+  z-index: 5;
+}
+
+.product-image-container {
+  text-align: center;
+  position: relative;
+  height: 100%;
+}
+
+.main-img {
+  max-height: 180px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Botón "Ver mas" que aparece abajo en el borde */
+.btn-hover-action {
+  position: absolute;
+  bottom: -35px; /* Lo bajamos para que sobresalga o quede justo en el borde */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #00d170 !important;
+  border: none !important;
+  padding: 5px 25px !important;
+  font-size: 0.9rem !important;
+  border-radius: 0 !important;
+}
+
+/* Texto fuera de la caja */
+.product-title-text {
+  font-size: 0.85rem;
+  color: #222;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.product-price-text {
+  font-size: 0.9rem;
+  color: #222;
+}
