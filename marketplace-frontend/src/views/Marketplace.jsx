@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import bannerImg from '../assets/banner-person.png';
 import { UserContext } from "../context/UserProvider";
 import { Container, Row, Col } from "react-bootstrap";
 import ProductCard from "../components/ProductCard";
